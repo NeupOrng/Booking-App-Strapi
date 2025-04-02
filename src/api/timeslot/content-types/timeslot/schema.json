@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "timeslots",
+  "info": {
+    "singularName": "timeslot",
+    "pluralName": "timeslots",
+    "displayName": "Timeslot",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "display_name": {
+      "type": "string",
+      "required": true
+    },
+    "event_time_start_at": {
+      "type": "time",
+      "required": true
+    },
+    "event_date": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event-date.event-date",
+      "inversedBy": "timeslots"
+    },
+    "price": {
+      "type": "decimal",
+      "required": true
+    },
+    "attendees": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::attendee.attendee",
+      "mappedBy": "timeslot"
+    }
+  }
+}

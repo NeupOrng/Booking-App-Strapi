@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "event_dates",
+  "info": {
+    "singularName": "event-date",
+    "pluralName": "event-dates",
+    "displayName": "Event Date",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date"
+    },
+    "state": {
+      "type": "enumeration",
+      "enum": [
+        "open",
+        "expired",
+        "deleted"
+      ],
+      "required": true,
+      "default": "open"
+    },
+    "timeslots": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::timeslot.timeslot",
+      "mappedBy": "event_date"
+    },
+    "attendees": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::attendee.attendee",
+      "mappedBy": "event_date"
+    }
+  }
+}

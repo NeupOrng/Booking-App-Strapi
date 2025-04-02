@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "attendees",
+  "info": {
+    "singularName": "attendee",
+    "pluralName": "attendees",
+    "displayName": "Attendee",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "fullname": {
+      "type": "string"
+    },
+    "timeslot": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::timeslot.timeslot",
+      "inversedBy": "attendees"
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email"
+    },
+    "paid_amount": {
+      "type": "decimal"
+    },
+    "event_date": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event-date.event-date",
+      "inversedBy": "attendees"
+    }
+  }
+}
