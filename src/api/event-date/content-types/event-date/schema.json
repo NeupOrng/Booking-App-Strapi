@@ -38,6 +38,26 @@
       "relation": "oneToMany",
       "target": "api::attendee.attendee",
       "mappedBy": "event_date"
+    },
+    "price": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "qrcode": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "telegram": {
+      "type": "string",
+      "required": true
     }
   }
 }

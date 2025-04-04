@@ -25,10 +25,6 @@
       "target": "api::event-date.event-date",
       "inversedBy": "timeslots"
     },
-    "price": {
-      "type": "decimal",
-      "required": true
-    },
     "attendees": {
       "type": "relation",
       "relation": "oneToMany",

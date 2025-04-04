@@ -390,6 +390,9 @@ export interface ApiAttendeeAttendee extends Struct.CollectionTypeSchema {
       'api::event-date.event-date'
     >;
     fullname: Schema.Attribute.String;
+    is_paid: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -399,6 +402,7 @@ export interface ApiAttendeeAttendee extends Struct.CollectionTypeSchema {
     paid_amount: Schema.Attribute.Decimal;
     phone: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    receipt: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     timeslot: Schema.Attribute.Relation<'manyToOne', 'api::timeslot.timeslot'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -429,10 +433,15 @@ export interface ApiEventDateEventDate extends Struct.CollectionTypeSchema {
       'api::event-date.event-date'
     > &
       Schema.Attribute.Private;
+    price: Schema.Attribute.Decimal &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<0>;
     publishedAt: Schema.Attribute.DateTime;
+    qrcode: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     state: Schema.Attribute.Enumeration<['open', 'expired', 'deleted']> &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'open'>;
+    telegram: Schema.Attribute.String & Schema.Attribute.Required;
     timeslots: Schema.Attribute.Relation<'oneToMany', 'api::timeslot.timeslot'>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
@@ -469,7 +478,6 @@ export interface ApiTimeslotTimeslot extends Struct.CollectionTypeSchema {
       'api::timeslot.timeslot'
     > &
       Schema.Attribute.Private;
-    price: Schema.Attribute.Decimal & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

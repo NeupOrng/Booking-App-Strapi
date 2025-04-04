@@ -35,6 +35,21 @@
       "relation": "manyToOne",
       "target": "api::event-date.event-date",
       "inversedBy": "attendees"
+    },
+    "is_paid": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "receipt": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
