@@ -1,18 +1,17 @@
 FROM node:latest
-# or another compatible Node version
+# Installing libvips-dev for sharp Compatibility
+RUN apt-get update && apt-get install -y libvips-dev
+ARG NODE_ENV=development
+ENV NODE_ENV=${NODE_ENV}
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
+WORKDIR /opt/
+COPY package.json package-lock.json ./
+RUN npm install -g node-gyp
+RUN npm config set fetch-retry-maxtimeout 600000 -g && npm install
+ENV PATH /opt/node_modules/.bin:$PATH
 
-WORKDIR /app
-
-COPY package.json pnpm-lock.yaml ./
-
-RUN pnpm install
-
+WORKDIR /opt/app
 COPY . .
-
-RUN pnpm run build
-
+RUN ["npm", "run", "build"]
 EXPOSE 1337
-
-CMD ["pnpm", "run", "start"]
+CMD ["npm", "run", "start"]
