@@ -509,6 +509,38 @@ export interface ApiScheduleSchedule extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiTelegramTelegram extends Struct.CollectionTypeSchema {
+  collectionName: 'telegrams';
+  info: {
+    description: '';
+    displayName: 'telegram';
+    pluralName: 'telegrams';
+    singularName: 'telegram';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    chatId: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    firstname: Schema.Attribute.String;
+    lastname: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::telegram.telegram'
+    > &
+      Schema.Attribute.Private;
+    phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiTimeslotTimeslot extends Struct.CollectionTypeSchema {
   collectionName: 'timeslots';
   info: {
@@ -1053,6 +1085,7 @@ declare module '@strapi/strapi' {
       'api::config.config': ApiConfigConfig;
       'api::event-date.event-date': ApiEventDateEventDate;
       'api::schedule.schedule': ApiScheduleSchedule;
+      'api::telegram.telegram': ApiTelegramTelegram;
       'api::timeslot.timeslot': ApiTimeslotTimeslot;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

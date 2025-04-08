@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "telegrams",
+  "info": {
+    "singularName": "telegram",
+    "pluralName": "telegrams",
+    "displayName": "telegram",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "phone": {
+      "type": "string"
+    },
+    "chatId": {
+      "type": "string"
+    },
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    }
+  }
+}
