@@ -15,21 +15,14 @@
       "type": "string",
       "required": true
     },
-    "event_time_start_at": {
-      "type": "time",
-      "required": true
+    "event_time": {
+      "type": "time"
     },
-    "event_date": {
+    "schedule": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::event-date.event-date",
+      "target": "api::schedule.schedule",
       "inversedBy": "timeslots"
-    },
-    "attendees": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::attendee.attendee",
-      "mappedBy": "timeslot"
     }
   }
 }

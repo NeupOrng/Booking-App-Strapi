@@ -386,7 +386,7 @@ export interface ApiAttendeeAttendee extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     email: Schema.Attribute.Email;
     event_date: Schema.Attribute.Relation<
-      'manyToOne',
+      'oneToOne',
       'api::event-date.event-date'
     >;
     fullname: Schema.Attribute.String;
@@ -402,8 +402,39 @@ export interface ApiAttendeeAttendee extends Struct.CollectionTypeSchema {
     paid_amount: Schema.Attribute.Decimal;
     phone: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    receipt: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    timeslot: Schema.Attribute.Relation<'manyToOne', 'api::timeslot.timeslot'>;
+    schedule: Schema.Attribute.Relation<'oneToOne', 'api::schedule.schedule'>;
+    timeslot: Schema.Attribute.Relation<'oneToOne', 'api::timeslot.timeslot'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiConfigConfig extends Struct.SingleTypeSchema {
+  collectionName: 'configs';
+  info: {
+    displayName: 'Config';
+    pluralName: 'configs';
+    singularName: 'config';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::config.config'
+    > &
+      Schema.Attribute.Private;
+    payment_qr_code: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    telegram_url: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -414,7 +445,7 @@ export interface ApiEventDateEventDate extends Struct.CollectionTypeSchema {
   collectionName: 'event_dates';
   info: {
     description: '';
-    displayName: 'Event Date';
+    displayName: 'Event';
     pluralName: 'event-dates';
     singularName: 'event-date';
   };
@@ -422,11 +453,10 @@ export interface ApiEventDateEventDate extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    attendees: Schema.Attribute.Relation<'oneToMany', 'api::attendee.attendee'>;
+    attendee: Schema.Attribute.Relation<'oneToOne', 'api::attendee.attendee'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    date: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -437,13 +467,42 @@ export interface ApiEventDateEventDate extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<0>;
     publishedAt: Schema.Attribute.DateTime;
-    qrcode: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    schedules: Schema.Attribute.Relation<'oneToMany', 'api::schedule.schedule'>;
     state: Schema.Attribute.Enumeration<['open', 'expired', 'deleted']> &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'open'>;
-    telegram: Schema.Attribute.String & Schema.Attribute.Required;
-    timeslots: Schema.Attribute.Relation<'oneToMany', 'api::timeslot.timeslot'>;
     title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiScheduleSchedule extends Struct.CollectionTypeSchema {
+  collectionName: 'schedules';
+  info: {
+    description: '';
+    displayName: 'schedule';
+    pluralName: 'schedules';
+    singularName: 'schedule';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.Date;
+    event: Schema.Attribute.Relation<'manyToOne', 'api::event-date.event-date'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::schedule.schedule'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    timeslots: Schema.Attribute.Relation<'oneToMany', 'api::timeslot.timeslot'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -462,16 +521,11 @@ export interface ApiTimeslotTimeslot extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    attendees: Schema.Attribute.Relation<'oneToMany', 'api::attendee.attendee'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     display_name: Schema.Attribute.String & Schema.Attribute.Required;
-    event_date: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::event-date.event-date'
-    >;
-    event_time_start_at: Schema.Attribute.Time & Schema.Attribute.Required;
+    event_time: Schema.Attribute.Time;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -479,6 +533,7 @@ export interface ApiTimeslotTimeslot extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    schedule: Schema.Attribute.Relation<'manyToOne', 'api::schedule.schedule'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -995,7 +1050,9 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::attendee.attendee': ApiAttendeeAttendee;
+      'api::config.config': ApiConfigConfig;
       'api::event-date.event-date': ApiEventDateEventDate;
+      'api::schedule.schedule': ApiScheduleSchedule;
       'api::timeslot.timeslot': ApiTimeslotTimeslot;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

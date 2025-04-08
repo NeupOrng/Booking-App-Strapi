@@ -4,7 +4,7 @@
   "info": {
     "singularName": "event-date",
     "pluralName": "event-dates",
-    "displayName": "Event Date",
+    "displayName": "Event",
     "description": ""
   },
   "options": {
@@ -13,9 +13,6 @@
   "attributes": {
     "title": {
       "type": "string"
-    },
-    "date": {
-      "type": "date"
     },
     "state": {
       "type": "enumeration",
@@ -27,37 +24,22 @@
       "required": true,
       "default": "open"
     },
-    "timeslots": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::timeslot.timeslot",
-      "mappedBy": "event_date"
-    },
-    "attendees": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::attendee.attendee",
-      "mappedBy": "event_date"
-    },
     "price": {
       "type": "decimal",
       "required": true,
       "default": 0
     },
-    "qrcode": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+    "schedules": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::schedule.schedule",
+      "mappedBy": "event"
     },
-    "telegram": {
-      "type": "string",
-      "required": true
+    "attendee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::attendee.attendee",
+      "mappedBy": "event_date"
     }
   }
 }

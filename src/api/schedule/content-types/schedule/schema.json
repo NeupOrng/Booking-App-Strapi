@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "schedules",
+  "info": {
+    "singularName": "schedule",
+    "pluralName": "schedules",
+    "displayName": "schedule",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "date": {
+      "type": "date"
+    },
+    "timeslots": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::timeslot.timeslot",
+      "mappedBy": "schedule"
+    },
+    "event": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event-date.event-date",
+      "inversedBy": "schedules"
+    }
+  }
+}
