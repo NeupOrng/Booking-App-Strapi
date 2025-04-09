@@ -196,6 +196,10 @@ export default {
       models: ['api::attendee.attendee'],
       async afterCreate(event) {
         const { result } = event;
+        if(result.publishedAt === null) {
+          strapi.log.info('Attendee is not published yet!');
+          return;
+        }
         const data = await strapi.documents('api::attendee.attendee').findFirst({
           filters: { documentId: result.documentId },
           populate: ['event_date', 'schedule','timeslot']
@@ -212,6 +216,7 @@ export default {
               },
             },
           );
+          strapi.log.info(`Telegram message sent to ${telegram.phone}`);
         });
         strapi.log.info(`Telegram bot is running! ${telegram.length}`);
       }
