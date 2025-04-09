@@ -32,8 +32,7 @@
     "schedules": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::schedule.schedule",
-      "mappedBy": "event"
+      "target": "api::schedule.schedule"
     },
     "attendee": {
       "type": "relation",

@@ -17,14 +17,7 @@
     "timeslots": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::timeslot.timeslot",
-      "mappedBy": "schedule"
-    },
-    "event": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::event-date.event-date",
-      "inversedBy": "schedules"
+      "target": "api::timeslot.timeslot"
     }
   }
 }

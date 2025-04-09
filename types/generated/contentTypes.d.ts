@@ -494,7 +494,6 @@ export interface ApiScheduleSchedule extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     date: Schema.Attribute.Date;
-    event: Schema.Attribute.Relation<'manyToOne', 'api::event-date.event-date'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -565,7 +564,6 @@ export interface ApiTimeslotTimeslot extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    schedule: Schema.Attribute.Relation<'manyToOne', 'api::schedule.schedule'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
