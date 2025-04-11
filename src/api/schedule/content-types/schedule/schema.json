@@ -16,8 +16,9 @@
     },
     "timeslots": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::timeslot.timeslot"
+      "relation": "manyToMany",
+      "target": "api::timeslot.timeslot",
+      "inversedBy": "schedules"
     }
   }
 }

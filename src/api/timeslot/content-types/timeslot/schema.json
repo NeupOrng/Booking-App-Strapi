@@ -17,6 +17,12 @@
     },
     "event_time": {
       "type": "time"
+    },
+    "schedules": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::schedule.schedule",
+      "inversedBy": "timeslots"
     }
   }
 }

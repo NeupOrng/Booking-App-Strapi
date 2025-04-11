@@ -501,7 +501,10 @@ export interface ApiScheduleSchedule extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    timeslots: Schema.Attribute.Relation<'oneToMany', 'api::timeslot.timeslot'>;
+    timeslots: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::timeslot.timeslot'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -564,6 +567,10 @@ export interface ApiTimeslotTimeslot extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    schedules: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::schedule.schedule'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
