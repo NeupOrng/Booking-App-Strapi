@@ -466,6 +466,7 @@ export interface ApiEventDateEventDate extends Struct.CollectionTypeSchema {
     price: Schema.Attribute.Decimal &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<0>;
+    price_for_display: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     schedules: Schema.Attribute.Relation<'oneToMany', 'api::schedule.schedule'>;
     state: Schema.Attribute.Enumeration<['open', 'expired', 'deleted']> &

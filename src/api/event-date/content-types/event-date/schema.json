@@ -39,6 +39,9 @@
       "relation": "oneToOne",
       "target": "api::attendee.attendee",
       "mappedBy": "event_date"
+    },
+    "price_for_display": {
+      "type": "string"
     }
   }
 }
