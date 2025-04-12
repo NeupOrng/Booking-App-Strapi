@@ -378,7 +378,7 @@ export interface ApiAttendeeAttendee extends Struct.CollectionTypeSchema {
     singularName: 'attendee';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -413,6 +413,7 @@ export interface ApiAttendeeAttendee extends Struct.CollectionTypeSchema {
 export interface ApiConfigConfig extends Struct.SingleTypeSchema {
   collectionName: 'configs';
   info: {
+    description: '';
     displayName: 'Config';
     pluralName: 'configs';
     singularName: 'config';
@@ -450,7 +451,7 @@ export interface ApiEventDateEventDate extends Struct.CollectionTypeSchema {
     singularName: 'event-date';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     attendee: Schema.Attribute.Relation<'oneToOne', 'api::attendee.attendee'>;
@@ -488,7 +489,7 @@ export interface ApiScheduleSchedule extends Struct.CollectionTypeSchema {
     singularName: 'schedule';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -553,7 +554,7 @@ export interface ApiTimeslotTimeslot extends Struct.CollectionTypeSchema {
     singularName: 'timeslot';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;

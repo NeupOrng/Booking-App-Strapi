@@ -4,7 +4,8 @@
   "info": {
     "singularName": "config",
     "pluralName": "configs",
-    "displayName": "Config"
+    "displayName": "Config",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -14,14 +15,15 @@
       "type": "string"
     },
     "payment_qr_code": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }
