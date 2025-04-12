@@ -483,7 +483,7 @@ export interface ApiScheduleSchedule extends Struct.CollectionTypeSchema {
   collectionName: 'schedules';
   info: {
     description: '';
-    displayName: 'schedule';
+    displayName: 'Schedule';
     pluralName: 'schedules';
     singularName: 'schedule';
   };
@@ -516,7 +516,7 @@ export interface ApiTelegramTelegram extends Struct.CollectionTypeSchema {
   collectionName: 'telegrams';
   info: {
     description: '';
-    displayName: 'telegram';
+    displayName: 'Telegram';
     pluralName: 'telegrams';
     singularName: 'telegram';
   };
