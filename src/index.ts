@@ -25,9 +25,8 @@ const successfulRegisterTemplate = (order) => {
       "You have received a new register!\n",
       `Customer: ${order.fullname}`,
       `Phone Number: ${order.phone}`,
-      `Email: ${order.email}`,
       `Event: ${order.event_date.title}`,
-      `Amount to Pay: ${order.paid_amount}`,
+      `Amount to Pay: $${order.paid_amount}`,
       `Schedule: ${order.schedule.date}`,
       `Time: ${order.timeslot.event_time}`,
     ].join("\n");
