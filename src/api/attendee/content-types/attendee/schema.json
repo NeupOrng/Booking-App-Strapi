@@ -18,9 +18,6 @@
       "type": "string",
       "required": true
     },
-    "email": {
-      "type": "email"
-    },
     "paid_amount": {
       "type": "decimal"
     },

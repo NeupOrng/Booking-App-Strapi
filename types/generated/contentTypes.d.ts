@@ -384,7 +384,6 @@ export interface ApiAttendeeAttendee extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    email: Schema.Attribute.Email;
     event_date: Schema.Attribute.Relation<
       'oneToOne',
       'api::event-date.event-date'
