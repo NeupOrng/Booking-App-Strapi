@@ -39,6 +39,8 @@ volumes:
       o: bind
       device: ../strapi-backup/.postgres-data
   strapi-app:
-    type: none
-    o: bind
-    device: ../strapi-backup/.strapi-app
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ../strapi-backup/.strapi-app
