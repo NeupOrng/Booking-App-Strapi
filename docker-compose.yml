@@ -1,7 +1,7 @@
 version: '3'
 services:
   strapi:
-    image: book-app-strapi:1.0.4
+    image: book-app-strapi:1.0.6
     container_name: strapi
     restart: unless-stopped
     environment:
@@ -12,7 +12,7 @@ services:
       DATABASE_USERNAME: strapi
       DATABASE_PASSWORD: strapi
     volumes:
-      - ./app:/srv/app
+      - strapi-app:/srv/app
     ports:
       - '1337:1337'
     depends_on:
@@ -38,3 +38,7 @@ volumes:
       type: none
       o: bind
       device: ../strapi-backup/.postgres-data
+  strapi-app:
+    type: none
+    o: bind
+    device: ../strapi-backup/.strapi-app
