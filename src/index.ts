@@ -25,14 +25,13 @@ const successfulRegisterTemplate = (order) => {
       "You have received a new register!\n",
       `Customer: ${order.fullname}`,
       `Phone Number: ${order.phone}`,
-      `Event: ${order.event_date.title}`,
+      `Event: ${order.event.title}`,
       `Amount to Pay: $${order.paid_amount}`,
       `Schedule: ${order.schedule.date}`,
       `Time: ${order.timeslot.event_time}`,
     ].join("\n");
 
     return message;
-
 }
 
 const telebot = (strapi: Core.Strapi, bot) => {
@@ -201,7 +200,7 @@ export default {
         }
         const data = await strapi.documents('api::attendee.attendee').findFirst({
           filters: { documentId: result.documentId },
-          populate: ['event_date', 'schedule','timeslot']
+          populate: ['event', 'schedule','timeslot']
         });
         const message = successfulRegisterTemplate(data);
         const telegrams = await strapi.db.query('api::telegram.telegram').findMany();

@@ -384,10 +384,7 @@ export interface ApiAttendeeAttendee extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    event_date: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::event-date.event-date'
-    >;
+    event: Schema.Attribute.Relation<'oneToOne', 'api::event-date.event-date'>;
     fullname: Schema.Attribute.String;
     is_paid: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
@@ -482,7 +479,6 @@ export interface ApiEventDateEventDate extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    attendee: Schema.Attribute.Relation<'oneToOne', 'api::attendee.attendee'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -497,7 +493,10 @@ export interface ApiEventDateEventDate extends Struct.CollectionTypeSchema {
       Schema.Attribute.DefaultTo<0>;
     price_for_display: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    schedules: Schema.Attribute.Relation<'oneToMany', 'api::schedule.schedule'>;
+    schedules: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::schedule.schedule'
+    >;
     state: Schema.Attribute.Enumeration<['open', 'expired', 'deleted']> &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'open'>;
@@ -524,6 +523,13 @@ export interface ApiScheduleSchedule extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     date: Schema.Attribute.Date;
+    events: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::event-date.event-date'
+    >;
+    is_expired: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

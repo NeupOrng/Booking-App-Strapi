@@ -21,11 +21,10 @@
     "paid_amount": {
       "type": "decimal"
     },
-    "event_date": {
+    "event": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::event-date.event-date",
-      "inversedBy": "attendee"
+      "target": "api::event-date.event-date"
     },
     "is_paid": {
       "type": "boolean",

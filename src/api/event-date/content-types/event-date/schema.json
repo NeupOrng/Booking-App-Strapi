@@ -31,14 +31,9 @@
     },
     "schedules": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::schedule.schedule"
-    },
-    "attendee": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::attendee.attendee",
-      "mappedBy": "event_date"
+      "relation": "manyToMany",
+      "target": "api::schedule.schedule",
+      "mappedBy": "events"
     },
     "price_for_display": {
       "type": "string"

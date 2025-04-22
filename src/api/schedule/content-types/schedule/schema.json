@@ -19,6 +19,17 @@
       "relation": "manyToMany",
       "target": "api::timeslot.timeslot",
       "inversedBy": "schedules"
+    },
+    "events": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::event-date.event-date",
+      "inversedBy": "schedules"
+    },
+    "is_expired": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }
