@@ -438,35 +438,6 @@ export interface ApiConfigConfig extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiCountAttendeeCountAttendee
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'count_attendees';
-  info: {
-    displayName: 'Count Attendee';
-    pluralName: 'count-attendees';
-    singularName: 'count-attendee';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    count: Schema.Attribute.Integer;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::count-attendee.count-attendee'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiEventDateEventDate extends Struct.CollectionTypeSchema {
   collectionName: 'event_dates';
   info: {
@@ -1126,7 +1097,6 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::attendee.attendee': ApiAttendeeAttendee;
       'api::config.config': ApiConfigConfig;
-      'api::count-attendee.count-attendee': ApiCountAttendeeCountAttendee;
       'api::event-date.event-date': ApiEventDateEventDate;
       'api::schedule.schedule': ApiScheduleSchedule;
       'api::telegram.telegram': ApiTelegramTelegram;
