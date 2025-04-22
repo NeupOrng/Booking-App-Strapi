@@ -23,6 +23,10 @@
       "relation": "manyToMany",
       "target": "api::schedule.schedule",
       "mappedBy": "timeslots"
+    },
+    "limit_participant": {
+      "type": "integer",
+      "default": 10
     }
   }
 }
